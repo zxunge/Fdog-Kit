@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
+#ifdef Q_OS_WIN
 #include <QSystemTrayIcon>
 #include <QGraphicsDropShadowEffect>
 #include <QVector>
@@ -12,7 +14,6 @@
 
 #define DARK_THEME 0   //暗黑主题
 #define LIGHT_THEME 1  //浅色主题
-
 
 enum WindowStretchRectState
 {
@@ -26,6 +27,7 @@ enum WindowStretchRectState
     LEFT_BOTTOM_RECT,           // 鼠标在左下角区域;
     LEFT_BORDER                 // 鼠标在左边框区域;
 };
+#endif // Q_OS_WIN
 
 namespace Ui {
 class MainWindow;
@@ -39,6 +41,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    #ifdef Q_OS_WIN
     void calculateCurrentStrechRect();
 
     WindowStretchRectState getCurrentStretchState(QPoint cursorPos);
@@ -103,6 +106,7 @@ private:
     bool isShowToolKit = false; //是否显示工具栏
     bool isFullScreen = false;  //是否全屏
     bool isMaxShow = false;     //是否最大化显示
+    #endif // Q_OS_WIN
 
 private:
     Ui::MainWindow *ui;

@@ -1,6 +1,7 @@
-﻿#pragma execution_character_set("utf-8")
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+#ifdef Q_OS_WIN   // Windows 下使用不同界面
 #include <QGraphicsDropShadowEffect>
 #include <QColor>
 #include <QMouseEvent>
@@ -31,12 +32,15 @@
 #include <QDesktopWidget>
 #include "windows.h"
 #include "windowsx.h"
+#endif // Q_OS_WIN
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
+    #ifdef Q_OS_WIN
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
     // QMainWindow透明显示，当设置主显示窗口的外边距时，防止外边距显示出来。
     this->setAttribute(Qt::WA_TranslucentBackground, true);
@@ -66,14 +70,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(shortcut, SIGNAL(activated()), this, SLOT(rece_toolButton_fullScreen_sign()));
 
     setSupportStretch(true);
+    #endif // Q_OS_WIN
 }
 
+#ifdef Q_OS_WIN
 void MainWindow::calculateCurrentStrechRect()
 {
 
     // 四个角Rect;
     m_leftTopRect = QRect(0, 0, STRETCH_RECT_WIDTH, STRETCH_RECT_HEIGHT);
-    m_leftBottomRect = QRect(0, this->height() - STRETCH_RECT_HEIGHT, STRETCH_RECT_WIDTH, STRETCH_RECT_WIDTH);
+    m_leftBottomRect = QRect(0, ththis-is->height() - STRETCH_RECT_HEIGHT, STRETCH_RECT_WIDTH, STRETCH_RECT_WIDTH);
     m_rightTopRect = QRect(this->width() - STRETCH_RECT_WIDTH, 0, STRETCH_RECT_WIDTH, STRETCH_RECT_HEIGHT);
     m_rightBottomRect = QRect(this->width() - STRETCH_RECT_WIDTH, this->height() - STRETCH_RECT_HEIGHT, STRETCH_RECT_WIDTH, STRETCH_RECT_HEIGHT);
 
@@ -563,9 +569,7 @@ void MainWindow::rece_toolButton_fullScreen_sign()
     }
 
 }
-
-
-
+#endif // Q_OS_WIN
 
 MainWindow::~MainWindow()
 {
