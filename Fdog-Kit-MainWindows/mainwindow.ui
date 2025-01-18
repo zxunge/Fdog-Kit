@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>1030</width>
-    <height>709</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Fdog-Kit-Zookeeper</string>
+   <string>MainWindow</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow,QWidget#centralWidget {
